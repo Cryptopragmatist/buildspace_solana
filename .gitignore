@@ -1,2 +1,4 @@
 node_modules
 .DS_STORE
+/.vscode
+/node_modules
