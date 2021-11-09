@@ -19,6 +19,14 @@ const App = () => {
       if (solana) {
         if (solana.isPhantom { {
           console.log('Phantom wallet found!');
+
+          /*. As soon as someone goes to our app, we can check to see if they have Phantom Wallet installed or not.*/
+          //the connect method will only run if the user has already authorized a connection to your app
+          const response = await solana.connect({ onlyIfTrusted: true });
+          console.log(
+            'Connected with Public Key:',
+            response.publicKey.toString()
+          );
         }
       } else {
         alert('Solana object not found! Get a Phantom Wallet 👻');
@@ -27,6 +35,16 @@ const App = () => {
       console.error(error);
     }
   };
+  const connectWallet = async () => {};
+  //pop up ui for connecting user wallet to the app
+  const renderNotConnectedContainer = () => (
+    <button
+      className="cta-button connect-wallet-button"
+      onClick={connectWallet}
+    >
+      Connect to Wallet
+    </button>
+  );
 
   /*In React, the useEffect hook gets called once on component mount when that second parameter (the []) is empty.
   . As soon as someone goes to our app, we can check to see if they have Phantom Wallet installed or not.*/
