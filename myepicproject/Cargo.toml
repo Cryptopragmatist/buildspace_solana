@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "programs/*"
+]
+[scripts]
+test = "node tests/myepicproject.js" 

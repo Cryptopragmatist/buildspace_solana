@@ -14,4 +14,4 @@ pub mod myepicproject {
 }
 
 #[derive(Accounts)]
-pub struct Initialize {}
+pub struct StartStuffOff {}
