@@ -3,14 +3,16 @@ import twitterLogo from './assets/twitter-logo.svg';
 import './App.css';
 
 // Constants
-const TWITTER_HANDLE = '_buildspace';
+const TWITTER_HANDLE = 'cryptopragmatic';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 const TEST_GIFS = [
-	'https://i.giphy.com/media/eIG0HfouRQJQr1wBzz/giphy.webp',
-	'https://media3.giphy.com/media/L71a8LW2UrKwPaWNYM/giphy.gif?cid=ecf05e47rr9qizx2msjucl1xyvuu47d7kf25tqt2lvo024uo&rid=giphy.gif&ct=g',
-	'https://media4.giphy.com/media/AeFmQjHMtEySooOc8K/giphy.gif?cid=ecf05e47qdzhdma2y3ugn32lkgi972z9mpfzocjj6z1ro4ec&rid=giphy.gif&ct=g',
-	'https://i.giphy.com/media/PAqjdPkJLDsmBRSYUp/giphy.webp'
+	'http://www.reactiongifs.com/r/stomer.gif',
+	'https://c.tenor.com/yTxA7WgkBEUAAAAd/grandpa-abe-exit.gif',
+	'https://c.tenor.com/z0xK794tF-kAAAAd/yelling-cloud.gif',
+	'http://www.reactiongifs.com/r/2012/06/homer_lurking.gif',
+  'https://c.tenor.com/IDJmsg3UIA4AAAAC/homer-day-dreaming.gif',
+  'https://c.tenor.com/Er8GuCI8O_QAAAAC/the-simpsons-excellent.gif'
 ]
 
 const App = () => {
@@ -99,9 +101,9 @@ const App = () => {
         sendGif();
       }}
     >
-      <input type="text" placeholder="Enter gif link!" 
+      <input type="text" placeholder="Enter simpsons only gif link!" 
       value={inputValue} onChange={onInputChange}  />
-      <button type="submit" className="cta-button submit-gif-button">Submit</button>
+      <button type="submit" className="cta-button submit-gif-button">Submit it, darn it</button>
     </form>
       <div className="gif-grid">
         {/* Map through gifList instead of TEST_GIFS */}
@@ -144,9 +146,9 @@ const App = () => {
 			{/* This was solely added for some styling fanciness */}
 			<div className={walletAddress ? 'authed-container' : 'container'}>
         <div className="header-container">
-          <p className="header">🖼 GIF Portal</p>
+          <p className="header">🖼 SIMPSON VILLAGE</p>
           <p className="sub-text">
-            View your GIF collection in the metaverse ✨ BLOOD GOD!
+            View your Simpson GIF collection in the metaverse ✨ SIMPSONS!
           </p>
           {/* Add the condition to show this only if we don't have a wallet address */}
           {!walletAddress && renderNotConnectedContainer()}
