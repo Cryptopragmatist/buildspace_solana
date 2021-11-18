@@ -28,7 +28,7 @@ pub mod myepicproject {
 //specify how to initialize the #[account] and what to hold in our StartStuffOff context
 #[derive(Accounts)]
 pub struct StartStuffOff<'info> {
-    #[account(init, payer = user, space = 9000)] //telling Solana how we want to initialize BaseAccount.
+    #[account(init, payer = user, space = 9000)] //telling Solana how we want to initialize BaseAccount. which is the pub base_account?
     //'init'  will tell Solana to create a new account owned by our current program
     //'payer = user' tells our program who's paying for the account to be created. In this case, it's the user calling the function.
     //'space = 9000' which will allocate 9000 bytes of space for our account
