@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*; //import anchor
 
-declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"); //program id
+declare_id!("o4RD8aU7TuiN7mEFJLhbCudeVFmt7Mpo2VWKB7zS8oi"); //program id
 
 #[program] 
 // #[porgram] are macros — and they basically attach code to our module. It's sorta like "inheriting" a class.
