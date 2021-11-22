@@ -28,14 +28,7 @@ const opts = {
 const TWITTER_HANDLE = 'cryptopragmatic';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
-const TEST_GIFS = [
-	'http://www.reactiongifs.com/r/stomer.gif',
-	'https://c.tenor.com/yTxA7WgkBEUAAAAd/grandpa-abe-exit.gif',
-	'https://c.tenor.com/z0xK794tF-kAAAAd/yelling-cloud.gif',
-	'http://www.reactiongifs.com/r/2012/06/homer_lurking.gif',
-  'https://c.tenor.com/IDJmsg3UIA4AAAAC/homer-day-dreaming.gif',
-  'https://c.tenor.com/Er8GuCI8O_QAAAAC/the-simpsons-excellent.gif'
-]
+
 
 const App = () => {
 
@@ -47,6 +40,14 @@ const App = () => {
   const [walletAddress, setWalletAddress] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [gifList, setGifList] = useState([]);
+ /* const TEST_GIFS = [
+    'http://www.reactiongifs.com/r/stomer.gif',
+    'https://c.tenor.com/yTxA7WgkBEUAAAAd/grandpa-abe-exit.gif',
+    'https://c.tenor.com/z0xK794tF-kAAAAd/yelling-cloud.gif',
+    'http://www.reactiongifs.com/r/2012/06/homer_lurking.gif',
+    'https://c.tenor.com/IDJmsg3UIA4AAAAC/homer-day-dreaming.gif',
+    'https://c.tenor.com/Er8GuCI8O_QAAAAC/the-simpsons-excellent.gif'
+  ] */
   
 
  //actions
@@ -88,6 +89,7 @@ const App = () => {
     setWalletAddress(response.publicKey.toString());
   }
   };
+
   const sendGif = async () => {
     if (inputValue.length > 0) {
       console.log('Gif link:', inputValue);
@@ -108,6 +110,8 @@ const App = () => {
     );
     return provider;
   }
+
+  
 
   const createGifAccount = async () => {
     try {
@@ -130,8 +134,6 @@ const App = () => {
     }
   }
 
-
-  //pop up ui for connecting user wallet to the app
   const renderNotConnectedContainer = () => (
     <button
       className="cta-button connect-wallet-button"
@@ -141,37 +143,50 @@ const App = () => {
     </button>
   );
 
-
-//creating a new function called renderConnectedContainer ,simple UI code that will map through all our GIF links and render them
-  const renderConnectedContainer = () => (
-    <div className="connected-container">
-      {/* Go ahead and add this input and button to start */}
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        sendGif();
-      }}
-    >
-      <input type="text" placeholder="Enter simpsons only gif link!" 
-      value={inputValue} onChange={onInputChange}  />
-      <button type="submit" className="cta-button submit-gif-button">Submit it, darn it</button>
-    </form>
-      <div className="gif-grid">
-        {/* Map through gifList instead of TEST_GIFS */}
-
-        {gifList.map((gif) => (
-          <div className="gif-item" key={gif}>
-            <img src={gif} alt={gif} />
+  //pop up ui for connecting user wallet to the app
+  const renderConnectedContainer = () => {
+    // If we hit this, it means the program account hasn't be initialized.
+    if (gifList === null) {
+      return (
+        <div className="connected-container">
+          <button className="cta-button submit-gif-button" onClick={createGifAccount}>
+            Do One-Time Initialization For GIF Program Account
+          </button>
+        </div>
+      )
+    } 
+    // Otherwise, we're good! Account exists. User can submit GIFs.
+    else {
+      return(
+        <div className="connected-container">
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              sendGif();
+            }}
+          >
+            <input
+              type="text"
+              placeholder="Enter gif link!"
+              value={inputValue}
+              onChange={onInputChange}
+            />
+            <button type="submit" className="cta-button submit-gif-button">
+              Submit
+            </button>
+          </form>
+          <div className="gif-grid">
+            {/* We use index as the key instead, also, the src is now item.gifLink */}
+            {gifList.map((item, index) => (
+              <div className="gif-item" key={index}>
+                <img src={item.gifLink} />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
-  );
-
-  /*In React, the useEffect hook gets called once on component mount when that second parameter (the []) is empty.
-  . As soon as someone goes to our app, we can check to see if they have Phantom Wallet installed or not.*/
-
-
+        </div>
+      )
+    }
+  }
 
   useEffect(() => {
     const onLoad = async () => {
@@ -180,6 +195,7 @@ const App = () => {
     window.addEventListener('load', onLoad);
     return () => window.removeEventListener('load', onLoad);
   }, []);
+  
 
   const getGifList = async() => {
     try {
@@ -195,9 +211,36 @@ const App = () => {
       setGifList(null);
     }
   }
-  
 
   useEffect(() => {
+    if (walletAddress) {
+      console.log('Fetching GIF list...');
+      getGifList()
+    }
+  }, [walletAddress]);
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  /*In React, the useEffect hook gets called once on component mount when that second parameter (the []) is empty.
+  . As soon as someone goes to our app, we can check to see if they have Phantom Wallet installed or not.*/
+
+
+
+
+
+  
+
+  /*useEffect(() => {
     if (walletAddress) {
       console.log('Fetching GIF list...');
       
@@ -206,7 +249,17 @@ const App = () => {
       // Set state
       getGifList()
     }
-  }, [walletAddress]);
+  }, [walletAddress]);*/
+
+
+  /*useEffect(() => {
+    if (walletAddress) {
+      console.log('Fetching GIF list...');
+      getGifList()
+    }
+  }, [walletAddress]); */
+
+  
 
   return (
     <div className="App">
